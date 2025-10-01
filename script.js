@@ -2,7 +2,7 @@ const inputbox= document.getElementById("input-box");
 const listcontainer= document.getElementById("list-container");
 function addtask(){
     if(inputbox.value===''){
-        alert("you must wrrite something");
+        alert("you must write something");
 
     }
     else{
@@ -39,3 +39,16 @@ function showtask(){
     listcontainer.innerHTML = localStorage.getItem("data");
 }
 showtask()
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('ServiceWorker registered:', reg.scope))
+      .catch(err => console.log('ServiceWorker registration failed:', err));
+  });
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+});
